@@ -100,3 +100,38 @@ Column Description Content
 79 fBodyBodyGyroJerkMag-mean() :  mean of fBodyBodyGyroJerkMag-mean()
 80 fBodyBodyGyroJerkMag-std() :  mean of fBodyBodyGyroJerkMag-std()
 81 fBodyBodyGyroJerkMag-meanFreq() :  mean of fBodyBodyGyroJerkMag-meanFreq()
+
+Description of the script run_analysis:
+- The script uses a function getRawData which reads the data separately
+  for the test and train directories. These directories have the same
+  structure, so it is easier to use a common function instead of 
+  implementing the same logic twice.
+- The function getRawdata returns test and train data together with
+  their corresponding activities and subjects.
+- Test and train data are merged together vertically, because the 
+  original data was split randomly.
+- The resulting dataframe is splitted in one containing the variables
+  for the by groups; the other one contains the numerical data for 
+  which the mean value should be computed.
+- The aggregate function renames the group values; so the original
+  names are set back after aggregation.
+  
+Description of the function getRawData:
+- The structure of test and train data only differs in diverse path
+  names. So the function needs the path name as parameter to read in
+  the data.
+- At first the raw data (X_test resp. X_train) is read in. 
+- Subsequently the variable names are extracted from features.txt.
+- To extract the relevant variable names (i. e. those including mean
+  or std in their names) a vector is build with length of the 
+  variable names vector, each item set to FALSE. Afterwards, the 
+  item is set to TRUE at the corresponding position if the variable
+  at this place contains mean or std. 
+- From the original data, only those with TRUE at the position in 
+  the relevant vector are copied to a new dataframe result. The names
+  of the columns are changed to the attributes in feature.txt.
+- In the next step the activites are read and added to the data in the
+  result dataframe (with the package sqldf).
+- The last step combines the subjects with the result. Here are only IDs 
+  in the data, no names of the subjects.
+- The function returns this resulting dataframe.
