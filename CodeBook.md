@@ -16,6 +16,8 @@ The dataset tidy consists of 180 rows and 81 variables. The first column contain
 second embodies the six activities, so the combination of this both columns results in 180 rows. The 
 remaining 79 columns contain the mean value of each responding variable in the source datasets
 X_test.txt and X_train.txt, in which only variables with "mean" and "std" in their names are included.
+The variable names remain unchanged, i. e. they are written like in the features.txt, to guarantee
+the connection to the original source data downloaded from the web. 
 
 Variables:
 Column Description Content
